@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Diagnostic Report Template -->
+        <template id="report_diagnostic_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <!-- Header -->
+                            <div class="row mt-4 mb-4">
+                                <div class="col-12">
+                                    <h2 class="text-center">
+                                        <strong>VEHICLE DIAGNOSTIC REPORT</strong>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <!-- General Information -->
+                            <div class="row">
+                                <div class="col-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td><strong>Date:</strong></td>
+                                            <td><span t-field="o.date"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Customer:</strong></td>
+                                            <td><span t-field="o.client_id.name"/></td>
+                                        </tr>
+                                        <tr t-if="o.client_id.phone">
+                                            <td><strong>Phone:</strong></td>
+                                            <td><span t-field="o.client_id.phone"/></td>
+                                        </tr>
+                                        <tr t-if="o.client_id.email">
+                                            <td><strong>E-mail:</strong></td>
+                                            <td><span t-field="o.client_id.email"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td><strong>Mechanic:</strong></td>
+                                            <td><span t-field="o.responsible_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>State:</strong></td>
+                                            <td>
+                                                <span t-if="o.state == 'draft'" class="badge badge-info">Draft</span>
+                                                <span t-if="o.state == 'in_progress'" class="badge badge-warning">In Progress</span>
+                                                <span t-if="o.state == 'done'" class="badge badge-success">Done</span>
+                                                <span t-if="o.state == 'cancelled'" class="badge badge-danger">Cancelled</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Vehicle Details -->
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4><strong>VEHICLE DETAILS</strong></h4>
+                                    <hr/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td><strong>Brand:</strong></td>
+                                            <td><span t-field="o.vehicle_id.brand_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Model:</strong></td>
+                                            <td><span t-field="o.vehicle_id.model_id.name"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Year:</strong></td>
+                                            <td><span t-field="o.vehicle_id.year"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td><strong>License Plate:</strong></td>
+                                            <td><span t-field="o.vehicle_id.license_plate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Color:</strong></td>
+                                            <td><span t-field="o.vehicle_id.color"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Type:</strong></td>
+                                            <td><span t-field="o.vehicle_id.vehicle_type_id.name"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Diagnostic Details -->
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <h4><strong>DIAGNOSTIC DETAILS</strong></h4>
+                                    <hr/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="border p-3" style="min-height: 200px; background-color: #f8f9fa;">
+                                        <p t-field="o.diagnostic_detail" style="white-space: pre-wrap;"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Signatures -->
+                            <div class="row mt-5">
+                                <div class="col-6 text-center">
+                                    <div style="border-top: 1px solid #000; padding-top: 10px;">
+                                        <strong>Customer Signature</strong><br/>
+                                        <span t-field="o.client_id.name"/>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <div style="border-top: 1px solid #000; padding-top: 10px;">
+                                        <strong>Mechanic Signature</strong><br/>
+                                        <span t-field="o.responsible_id.name"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <small class="text-muted">
+                                        Report generated on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M:%S')"/>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
