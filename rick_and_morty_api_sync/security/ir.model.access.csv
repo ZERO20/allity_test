@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rick_morty_character_user,rick.morty.character.user,model_rick_morty_character,base.group_user,1,1,1,1
+access_rick_morty_sync_wizard_user,rick.morty.sync.wizard.user,model_rick_morty_sync_wizard,base.group_user,1,1,1,1

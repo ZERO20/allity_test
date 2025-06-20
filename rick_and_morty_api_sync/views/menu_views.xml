@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_rick_morty_main"
+        name="Rick and Morty"
+        sequence="100"
+        web_icon="rick_and_morty_api_sync,static/description/icon.png"/>
+
+    <!-- Characters Menu -->
+    <menuitem id="menu_rick_morty_characters"
+        name="Characters"
+        parent="menu_rick_morty_main"
+        action="rick_and_morty_api_sync.action_rick_morty_character"
+        sequence="10"/>
+
+    <!-- Sync Menu -->
+    <menuitem id="menu_rick_morty_sync"
+        name="Sync Characters"
+        parent="menu_rick_morty_main"
+        action="rick_and_morty_api_sync.action_sync_characters_menu"
+        sequence="20"/>
+
+</odoo>

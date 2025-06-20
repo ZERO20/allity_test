@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sync Wizard Form View -->
+        <record id="view_rick_morty_sync_wizard_form" model="ir.ui.view">
+            <field name="name">rick.morty.sync.wizard.form</field>
+            <field name="model">rick.morty.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Rick and Morty Characters Synchronization">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <span invisible="state != 'draft'">
+                                    Rick and Morty Characters Synchronization
+                                </span>
+                                <span invisible="state != 'done'">
+                                    Synchronization Completed!
+                                </span>
+                                <span invisible="state != 'error'">
+                                    Synchronization Error
+                                </span>
+                            </h1>
+                        </div>
+
+                        <!-- Error Section -->
+                        <div invisible="state != 'error'">
+                            <separator string="Error Details"/>
+                            <group>
+                                <field name="error_message" readonly="1" widget="text"/>
+                            </group>
+                        </div>
+
+                        <!-- Instructions Section -->
+                        <div invisible="state != 'draft'">
+                            <separator string="Instructions"/>
+                            <p>This wizard will synchronize the first 20 characters from the Rick and Morty API.</p>
+                            <p>The process will:</p>
+                            <ul>
+                                <li>Download the first 20 character data from the API</li>
+                                <li>Create new characters that don't exist</li>
+                                <li>Update existing characters with new information</li>
+                                <li>Download and store character images</li>
+                            </ul>
+                            <p><strong>Note:</strong> This process will take a few seconds.</p>
+                        </div>
+
+                        <!-- Success Section -->
+                        <div invisible="state != 'done'">
+                            <separator string="Results"/>
+                            <div class="alert alert-success" role="alert">
+                                <p><strong>Synchronization completed successfully!</strong></p>
+                                <p>The first 20 characters from the Rick and Morty API have been synchronized.</p>
+                            </div>
+                        </div>
+
+                    </sheet>
+                    <footer>
+                        <button name="action_sync"
+                            string="Sync"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                        <button name="action_cancel"
+                            string="Close"
+                            type="object"
+                            class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Sync Wizard -->
+        <record id="action_rick_morty_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Synchronize Characters</field>
+            <field name="res_model">rick.morty.sync.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>
