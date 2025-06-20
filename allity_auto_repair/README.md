@@ -7,14 +7,14 @@ Módulo de Odoo 18 para la gestión de un taller mecánico que permite llevar el
 ## Características Principales
 
 ### 📋 Gestión de Diagnósticos
-- Registro completo de diagnósticos vehiculares
+- Registro completo de diagnósticos de automóviles
 - Estados del diagnóstico: Borrador → En Progreso → Terminado/Cancelado
 - Detalle completo del diagnóstico ingresado por el mecánico
 - Reporte PDF del diagnóstico
 
 ### Menús
 ```
-📁 Auto Repair
+📁 Taller Mécanico
 ├── 🔧 Taller
 │   ├── 📋 Diagnósticos
 │   ├── 👥 Clientes
