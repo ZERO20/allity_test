@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Vehicle Types -->
+        <record id="vehicle_type_auto" model="vehicle.type">
+            <field name="name">Auto</field>
+            <field name="description">Automóvil de pasajeros</field>
+        </record>
+
+        <record id="vehicle_type_pickup" model="vehicle.type">
+            <field name="name">Pick-UP</field>
+            <field name="description">Camioneta pick-up</field>
+        </record>
+
+        <!-- Vehicle Brands -->
+        <record id="vehicle_brand_nissan" model="vehicle.brand">
+            <field name="name">Nissan</field>
+        </record>
+
+        <record id="vehicle_brand_toyota" model="vehicle.brand">
+            <field name="name">Toyota</field>
+        </record>
+
+        <!-- Nissan Models -->
+        <record id="vehicle_model_nissan_march" model="vehicle.model">
+            <field name="name">March</field>
+            <field name="brand_id" ref="vehicle_brand_nissan"/>
+        </record>
+
+        <record id="vehicle_model_nissan_sentra" model="vehicle.model">
+            <field name="name">Sentra</field>
+            <field name="brand_id" ref="vehicle_brand_nissan"/>
+        </record>
+
+        <!-- Toyota Models -->
+        <record id="vehicle_model_toyota_corolla" model="vehicle.model">
+            <field name="name">Corolla</field>
+            <field name="brand_id" ref="vehicle_brand_toyota"/>
+        </record>
+
+        <record id="vehicle_model_toyota_camry" model="vehicle.model">
+            <field name="name">Camry</field>
+            <field name="brand_id" ref="vehicle_brand_toyota"/>
+        </record>
+
+        <!-- Demo Customers -->
+        <record id="demo_client_1" model="res.partner">
+            <field name="name">Juan Pérez</field>
+            <field name="phone">+1-555-123-4567</field>
+            <field name="email">juan.perez@example.com</field>
+            <field name="street">Calle Principal 123</field>
+            <field name="city">Ciudad</field>
+            <field name="is_company">False</field>
+        </record>
+
+        <record id="demo_client_2" model="res.partner">
+            <field name="name">María González</field>
+            <field name="phone">+1-555-987-6543</field>
+            <field name="email">maria.gonzalez@example.com</field>
+            <field name="street">Avenida Central 456</field>
+            <field name="city">Ciudad</field>
+            <field name="is_company">False</field>
+        </record>
+
+        <!-- Demo Vehicles -->
+        <record id="demo_vehicle_1" model="vehicle.vehicle">
+            <field name="brand_id" ref="vehicle_brand_nissan"/>
+            <field name="model_id" ref="vehicle_model_nissan_march"/>
+            <field name="year">2020</field>
+            <field name="color">Rojo</field>
+            <field name="license_plate">ABC-123</field>
+            <field name="vehicle_type_id" ref="vehicle_type_auto"/>
+        </record>
+
+        <record id="demo_vehicle_2" model="vehicle.vehicle">
+            <field name="brand_id" ref="vehicle_brand_toyota"/>
+            <field name="model_id" ref="vehicle_model_toyota_corolla"/>
+            <field name="year">2021</field>
+            <field name="color">Blanco</field>
+            <field name="license_plate">XYZ-789</field>
+            <field name="vehicle_type_id" ref="vehicle_type_auto"/>
+        </record>
+
+        <record id="demo_vehicle_3" model="vehicle.vehicle">
+            <field name="brand_id" ref="vehicle_brand_nissan"/>
+            <field name="model_id" ref="vehicle_model_nissan_sentra"/>
+            <field name="year">2019</field>
+            <field name="color">Azul</field>
+            <field name="license_plate">DEF-456</field>
+            <field name="vehicle_type_id" ref="vehicle_type_pickup"/>
+        </record>
+
+        <!-- Demo Diagnostics -->
+        <record id="demo_diagnostic_1" model="vehicle.diagnostic">
+            <field name="client_id" ref="demo_client_1"/>
+            <field name="vehicle_id" ref="demo_vehicle_1"/>
+            <field name="date" eval="(DateTime.now() - timedelta(days=7)).strftime('%Y-%m-%d')"/>
+            <field name="responsible_id" ref="base.user_admin"/>
+            <field name="diagnostic_detail">The vehicle has strange noises in the engine. It is recommended to review the lubrication system and change the oil. Also, the brake pads are worn out.</field>
+            <field name="state">done</field>
+        </record>
+
+        <record id="demo_diagnostic_2" model="vehicle.diagnostic">
+            <field name="client_id" ref="demo_client_2"/>
+            <field name="vehicle_id" ref="demo_vehicle_2"/>
+            <field name="date" eval="DateTime.now().strftime('%Y-%m-%d')"/>
+            <field name="responsible_id" ref="base.user_admin"/>
+            <field name="diagnostic_detail">Preventive maintenance performed. The air filter was changed, the tire pressure was checked and the electrical system was verified. Everything in optimal condition.</field>
+            <field name="state">in_progress</field>
+        </record>
+
+        <record id="demo_diagnostic_3" model="vehicle.diagnostic">
+            <field name="client_id" ref="demo_client_1"/>
+            <field name="vehicle_id" ref="demo_vehicle_3"/>
+            <field name="date" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="responsible_id" ref="base.user_admin"/>
+            <field name="diagnostic_detail">General review scheduled for the transmission system.</field>
+            <field name="state">draft</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Diagnostic Report -->
+        <record id="action_report_diagnostic" model="ir.actions.report">
+            <field name="name">Diagnostic Report</field>
+            <field name="model">vehicle.diagnostic</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">allity_auto_repair.report_diagnostic_template</field>
+            <field name="report_file">allity_auto_repair.report_diagnostic_template</field>
+            <field name="binding_model_id" ref="model_vehicle_diagnostic"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Diagnostic - %s' % (object.client_id.name)</field>
+        </record>
+    </data>
+</odoo>

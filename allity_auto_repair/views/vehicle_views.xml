@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vehicle List View -->
+        <record id="view_vehicle_vehicle_tree" model="ir.ui.view">
+            <field name="name">vehicle.vehicle.tree</field>
+            <field name="model">vehicle.vehicle</field>
+            <field name="arch" type="xml">
+                <list string="Vehicles">
+                    <field name="name"/>
+                    <field name="brand_id"/>
+                    <field name="model_id"/>
+                    <field name="year"/>
+                    <field name="color"/>
+                    <field name="license_plate"/>
+                    <field name="vehicle_type_id"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vehicle Form View -->
+        <record id="view_vehicle_vehicle_form" model="ir.ui.view">
+            <field name="name">vehicle.vehicle.form</field>
+            <field name="model">vehicle.vehicle</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="brand_id" options="{'no_create': True}"/>
+                                <field name="model_id" options="{'no_create': True}"/>
+                                <field name="year"/>
+                                <field name="color"/>
+                            </group>
+                            <group>
+                                <field name="license_plate"/>
+                                <field name="vehicle_type_id" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="notes" placeholder="Additional vehicle observations..."/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vehicle Search View -->
+        <record id="view_vehicle_vehicle_search" model="ir.ui.view">
+            <field name="name">vehicle.vehicle.search</field>
+            <field name="model">vehicle.vehicle</field>
+            <field name="arch" type="xml">
+                <search string="Search Vehicles">
+                    <field name="name" string="Vehicle"/>
+                    <field name="license_plate" string="License Plate"/>
+                    <field name="brand_id" string="Brand"/>
+                    <field name="model_id" string="Model"/>
+                    <field name="vehicle_type_id" string="Type"/>
+                    <field name="color" string="Color"/>
+                    <field name="year" string="Year"/>
+                    <separator/>
+                    <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active','=',False)]"/>
+                    <separator/>
+
+                    <separator/>
+                    <filter string="Current Year" name="current_year" domain="[('year','=',context_today().year)]"/>
+                    <filter string="Last 5 Years" name="last_5_years" domain="[('year','>=',context_today().year-5)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Brand" name="group_brand" context="{'group_by':'brand_id'}"/>
+                        <filter string="Model" name="group_model" context="{'group_by':'model_id'}"/>
+                        <filter string="Type" name="group_type" context="{'group_by':'vehicle_type_id'}"/>
+                        <filter string="Year" name="group_year" context="{'group_by':'year'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Vehicle Kanban View -->
+        <record id="view_vehicle_vehicle_kanban" model="ir.ui.view">
+            <field name="name">vehicle.vehicle.kanban</field>
+            <field name="model">vehicle.vehicle</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="brand_id"/>
+                    <field name="model_id"/>
+                    <field name="year"/>
+                    <field name="color"/>
+                    <field name="license_plate"/>
+                    <field name="vehicle_type_id"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <div>
+                                            <i class="fa fa-car" title="License Plate"/> <field name="license_plate"/>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-calendar" title="Year"/> <field name="year"/>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-paint-brush" title="Color"/> <field name="color"/>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-tag" title="Type"/> <field name="vehicle_type_id"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Vehicle Window Action -->
+        <record id="action_vehicle_vehicle" model="ir.actions.act_window">
+            <field name="name">Vehicles</field>
+            <field name="res_model">vehicle.vehicle</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Register your first vehicle!
+                </p>
+                <p>
+                    Register the vehicles that enter the workshop with all their data:
+                    brand, model, year, color, license plate and vehicle type.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

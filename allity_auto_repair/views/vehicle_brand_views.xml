@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vehicle Brand List View -->
+        <record id="view_vehicle_brand_tree" model="ir.ui.view">
+            <field name="name">vehicle.brand.tree</field>
+            <field name="model">vehicle.brand</field>
+            <field name="arch" type="xml">
+                <list string="Vehicle Brands">
+                    <field name="name"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vehicle Brand Form View -->
+        <record id="view_vehicle_brand_form" model="ir.ui.view">
+            <field name="name">vehicle.brand.form</field>
+            <field name="model">vehicle.brand</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle Brand">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name" placeholder="Vehicle brand name..."/>
+                        </group>
+                        <notebook>
+                            <page string="Models" name="models">
+                                <field name="model_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="active"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vehicle Brand Search View -->
+        <record id="view_vehicle_brand_search" model="ir.ui.view">
+            <field name="name">vehicle.brand.search</field>
+            <field name="model">vehicle.brand</field>
+            <field name="arch" type="xml">
+                <search string="Search Vehicle Brands">
+                    <field name="name" string="Brand" filter_domain="[('name','ilike',self)]"/>
+                    <separator/>
+                    <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Vehicle Brand Window Action -->
+        <record id="action_vehicle_brand" model="ir.actions.act_window">
+            <field name="name">Vehicle Brands</field>
+            <field name="res_model">vehicle.brand</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first vehicle brand!
+                </p>
+                <p>
+                    Vehicle brands are necessary to categorize vehicle models.
+                    Examples: Nissan, Toyota, Honda, Ford, etc.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

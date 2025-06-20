@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- auto repair menu -->
+        <menuitem id="menu_auto_repair_root" name="Auto Repair" sequence="10" web_icon="allity_auto_repair,static/description/icon.png"/>
+
+        <!-- workshop menu -->
+        <menuitem id="menu_workshop_root" name="Workshop" parent="menu_auto_repair_root" sequence="1"/>
+
+        <!-- workshop submenus -->
+        <!-- diagnostics -->
+        <menuitem id="menu_auto_repair_diagnostics" name="Diagnostics" parent="menu_workshop_root"
+            action="action_vehicle_diagnostic" sequence="1"/>
+
+        <!-- customers -->
+        <menuitem id="menu_auto_repair_customers" name="Customers" parent="menu_workshop_root"
+            action="base.action_partner_form" sequence="2"/>
+
+        <!-- vehicles -->
+        <menuitem id="menu_auto_repair_vehicles" name="Vehicles" parent="menu_workshop_root"
+            action="action_vehicle_vehicle" sequence="3"/>
+
+        <!-- configuration menu -->
+        <menuitem id="menu_configuration_root" name="Configuration" parent="menu_auto_repair_root" sequence="2"/>
+
+        <!-- configuration submenus -->
+        <!-- brands -->
+        <menuitem id="menu_configuration_brands" name="Brands" parent="menu_configuration_root"
+            action="action_vehicle_brand" sequence="1"/>
+
+        <!-- models -->
+        <menuitem id="menu_configuration_models" name="Models" parent="menu_configuration_root"
+            action="action_vehicle_model" sequence="2"/>
+
+        <!-- vehicle types -->
+        <menuitem id="menu_configuration_vehicle_types" name="Vehicle Types" parent="menu_configuration_root"
+            action="action_vehicle_type" sequence="3"/>
+
+    </data>
+</odoo>
